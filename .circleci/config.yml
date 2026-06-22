@@ -5,6 +5,9 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
 jobs:
   build-and-test:
     docker:
@@ -16,3 +19,15 @@ jobs:
       - run:
           name: Run Tests
           command: PYTHONPATH=. python -m unittest discover -s tests
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Deploy to Render
+          command: |
+            if [ -n "${RENDER_DEPLOY_HOOK}" ]; then
+              curl -X POST "${RENDER_DEPLOY_HOOK}"
+            else
+              echo "RENDER_DEPLOY_HOOK is not set. Skipping deployment."
+            fi

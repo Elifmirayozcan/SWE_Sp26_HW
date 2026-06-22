@@ -1,13 +1,10 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="row vh-100 align-items-center">
-    <div class="col-md-12">
-      <div class="text-center">
-        <h1>Software Engineering</h1><br>
-        <h2>Sp26</h2><br>
-        <h4>A Simple Web Application for Earth-Orbiting Satellites</h4><br>
-        <a href="/calculate" class="btn btn-lg btn-secondary" role="button">Start</a>
-      </div>
-    </div>
+<div class="container text-center mt-5">
+    <h1>Software Engineering</h1>
+    <h2>Spring 2026</h2>
+    <p class="lead">A Simple Web Application for Earth-Orbiting Satellites</p>
+    <a href="{{ url_for('main.calculate') }}" class="btn btn-secondary btn-lg">Start</a>
 </div>
 {% endblock %}
